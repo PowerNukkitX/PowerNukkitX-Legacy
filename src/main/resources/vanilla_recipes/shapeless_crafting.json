@@ -17582,6 +17582,21 @@
         ],
         "priority": 1
     },
+  {
+    "block": "stonecutter",
+    "input": [
+      {
+        "meta": 32767,
+        "name": "minecraft:cut_copper"
+      }
+    ],
+    "output": [
+      {
+        "name": "minecraft:chiseled_copper"
+      }
+    ],
+    "priority": 0
+  },
     {
         "block": "stonecutter",
         "input": [
@@ -17698,6 +17713,21 @@
         "priority": 1
     },
     {
+      "block": "stonecutter",
+      "input": [
+        {
+          "meta": 32767,
+          "name": "minecraft:exposed_cut_copper"
+        }
+      ],
+      "output": [
+        {
+          "name": "minecraft:exposed_chiseled_copper"
+        }
+      ],
+      "priority": 0
+    },
+  {
         "block": "stonecutter",
         "input": [
             {
@@ -17880,6 +17910,21 @@
         "block": "stonecutter",
         "input": [
             {
+              "meta": 32767,
+              "name": "minecraft:oxidized_cut_copper"
+            }
+        ],
+      "output": [
+        {
+          "name": "minecraft:oxidized_chiseled_copper"
+        }
+      ],
+      "priority": 0
+    },
+  {
+    "block": "stonecutter",
+    "input": [
+      {
                 "meta": 32767,
                 "name": "minecraft:polished_blackstone"
             }
@@ -18379,6 +18424,21 @@
         "block": "stonecutter",
         "input": [
             {
+              "meta": 32767,
+              "name": "minecraft:waxed_cut_copper"
+            }
+        ],
+      "output": [
+        {
+          "name": "minecraft:waxed_chiseled_copper"
+        }
+      ],
+      "priority": 0
+    },
+  {
+    "block": "stonecutter",
+    "input": [
+      {
                 "meta": 32767,
                 "name": "minecraft:waxed_exposed_copper"
             }
@@ -18491,6 +18551,21 @@
         "priority": 1
     },
     {
+      "block": "stonecutter",
+      "input": [
+        {
+          "meta": 32767,
+          "name": "minecraft:waxed_exposed_cut_copper"
+        }
+      ],
+      "output": [
+        {
+          "name": "minecraft:waxed_exposed_chiseled_copper"
+        }
+      ],
+      "priority": 0
+    },
+  {
         "block": "stonecutter",
         "input": [
             {
@@ -18605,6 +18680,21 @@
         "priority": 1
     },
     {
+      "block": "stonecutter",
+      "input": [
+        {
+          "meta": 32767,
+          "name": "minecraft:waxed_oxidized_cut_copper"
+        }
+      ],
+      "output": [
+        {
+          "name": "minecraft:waxed_oxidized_chiseled_copper"
+        }
+      ],
+      "priority": 0
+    },
+  {
         "block": "stonecutter",
         "input": [
             {
@@ -18723,6 +18813,21 @@
         "block": "stonecutter",
         "input": [
             {
+              "meta": 32767,
+              "name": "minecraft:waxed_weathered_cut_copper"
+            }
+        ],
+      "output": [
+        {
+          "name": "minecraft:waxed_weathered_chiseled_copper"
+        }
+      ],
+      "priority": 0
+    },
+  {
+    "block": "stonecutter",
+    "input": [
+      {
                 "meta": 32767,
                 "name": "minecraft:weathered_copper"
             }
@@ -18838,6 +18943,21 @@
         "block": "stonecutter",
         "input": [
             {
+              "meta": 32767,
+              "name": "minecraft:weathered_cut_copper"
+            }
+        ],
+      "output": [
+        {
+          "name": "minecraft:weathered_chiseled_copper"
+        }
+      ],
+      "priority": 0
+    },
+  {
+    "block": "stonecutter",
+    "input": [
+      {
                 "name": "minecraft:andesite"
             }
         ],

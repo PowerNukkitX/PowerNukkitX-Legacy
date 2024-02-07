@@ -355,34 +355,31 @@
   "minecraft:crimson_planks": [
     "minecraft:planks"
   ],
+  "minecraft:acacia_planks": [
+    "minecraft:planks"
+  ],
   "minecraft:cherry_planks": [
-    "minecraft:planks"
-  ],
-  "minecraft:mangrove_planks": [
-    "minecraft:planks"
-  ],
-  "minecraft:planks": [
-    "minecraft:planks"
-  ],
-  "minecraft:oak_planks": [
     "minecraft:planks"
   ],
   "minecraft:spruce_planks": [
     "minecraft:planks"
   ],
-  "minecraft:acacia_planks": [
+  "minecraft:jungle_planks": [
     "minecraft:planks"
   ],
-  "minecraft:birch_planks": [
+  "minecraft:mangrove_planks": [
     "minecraft:planks"
   ],
   "minecraft:dark_oak_planks": [
     "minecraft:planks"
   ],
-  "minecraft:jungle_planks": [
+  "minecraft:birch_planks": [
     "minecraft:planks"
   ],
   "minecraft:warped_planks": [
+    "minecraft:planks"
+  ],
+  "minecraft:oak_planks": [
     "minecraft:planks"
   ],
   "minecraft:arrow": [
@@ -463,16 +460,13 @@
   "minecraft:stonebrick": [
     "minecraft:stone_bricks"
   ],
-  "minecraft:jungle_door": [
-    "minecraft:door"
-  ],
-  "minecraft:mangrove_door": [
-    "minecraft:door"
-  ],
   "minecraft:wooden_door": [
     "minecraft:door"
   ],
   "minecraft:birch_door": [
+    "minecraft:door"
+  ],
+  "minecraft:waxed_exposed_copper_door": [
     "minecraft:door"
   ],
   "minecraft:bamboo_door": [
@@ -484,16 +478,43 @@
   "minecraft:spruce_door": [
     "minecraft:door"
   ],
+  "minecraft:dark_oak_door": [
+    "minecraft:door"
+  ],
+  "minecraft:oxidized_copper_door": [
+    "minecraft:door"
+  ],
+  "minecraft:jungle_door": [
+    "minecraft:door"
+  ],
+  "minecraft:mangrove_door": [
+    "minecraft:door"
+  ],
+  "minecraft:exposed_copper_door": [
+    "minecraft:door"
+  ],
+  "minecraft:waxed_oxidized_copper_door": [
+    "minecraft:door"
+  ],
+  "minecraft:weathered_copper_door": [
+    "minecraft:door"
+  ],
   "minecraft:warped_door": [
     "minecraft:door"
   ],
-  "minecraft:dark_oak_door": [
+  "minecraft:copper_door": [
+    "minecraft:door"
+  ],
+  "minecraft:waxed_weathered_copper_door": [
     "minecraft:door"
   ],
   "minecraft:crimson_door": [
     "minecraft:door"
   ],
   "minecraft:iron_door": [
+    "minecraft:door"
+  ],
+  "minecraft:waxed_copper_door": [
     "minecraft:door"
   ],
   "minecraft:acacia_door": [

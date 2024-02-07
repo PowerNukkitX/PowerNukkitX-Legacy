@@ -45,6 +45,7 @@ public class PlayerListPacket extends DataPacket {
                 this.putSkin(entry.skin);
                 this.putBoolean(entry.isTeacher);
                 this.putBoolean(entry.isHost);
+                this.putBoolean(entry.isSubClient);
             }
 
             for (Entry entry : this.entries) {
@@ -78,6 +79,7 @@ public class PlayerListPacket extends DataPacket {
         @PowerNukkitXOnly
         @Since("1.19.50-r3")
         public boolean trustedSkin;
+        public boolean isSubClient;
 
         public Entry(UUID uuid) {
             this.uuid = uuid;

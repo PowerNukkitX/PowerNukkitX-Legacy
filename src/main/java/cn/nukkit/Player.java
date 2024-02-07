@@ -1790,6 +1790,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
                 LevelChunkPacket chunk = new LevelChunkPacket();
                 chunk.chunkX = chunkPositionX + x;
                 chunk.chunkZ = chunkPositionZ + z;
+                chunk.dimension = getLevel().getDimension();
                 chunk.data = EmptyArrays.EMPTY_BYTES;
                 this.dataPacket(chunk);
             }
@@ -2722,6 +2723,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
         pk.chunkZ = z;
         pk.subChunkCount = subChunkCount;
         pk.data = payload;
+        pk.dimension = getLevel().getDimension();
 
         this.sendChunk(x, z, pk);
     }
@@ -3472,11 +3474,6 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
         DataPacketReceiveEvent ev = new DataPacketReceiveEvent(this, packet);
         this.server.getPluginManager().callEvent(ev);
         if (ev.isCancelled()) {
-            return;
-        }
-        if (packet.packetId() == ProtocolInfo.toNewProtocolID(ProtocolInfo.BATCH_PACKET)) {
-            List<DataPacket> dataPackets = unpackBatchedPackets((BatchPacket) packet);
-            dataPackets.forEach(this::handleDataPacket);
             return;
         }
         if (log.isTraceEnabled() && !server.isIgnoredPacket(packet.getClass())) {

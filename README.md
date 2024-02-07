@@ -25,7 +25,7 @@ Join US:
 
 What's new in PowerNukkitX? Let's See：
 
-- Support for 1.20.50 protocol.
+- Support for 1.20.60 protocol.
 - Support for 384 world height.
 - Support for The Nether world, no need to install additional plugin.
 - Support 3D biomes.<!--Custom dimension interface TODO-->

@@ -1,6 +1,5 @@
 package cn.nukkit.network;
 
-import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.api.*;
 import cn.nukkit.nbt.stream.FastByteArrayOutputStream;
@@ -309,14 +308,6 @@ public class Network {
         return hardWareNetworkInterfaces;
     }
 
-    public void processBatch(BatchPacket packet, Player player) {
-        try {
-            unpackBatchedPackets(packet, player.getNetworkSession().getCompression());
-        } catch (ProtocolException e) {
-            player.close("", e.getMessage());
-            log.error("Unable to process player packets ", e);
-        }
-    }
 
     @PowerNukkitOnly
     @Since("FUTURE")
@@ -375,30 +366,6 @@ public class Network {
         } catch (Exception e) {
             log.debug("Error whilst processing {} batched packets", packets.size());
         }
-    }
-
-    /**
-     * Process packets obtained from batch packets
-     * Required to perform additional analyses and filter unnecessary packets
-     *
-     * @param packets
-     */
-    @PowerNukkitDifference(info = "Handles exception if on of the packets in the list fails")
-    public void processPackets(Player player, List<DataPacket> packets) {
-        if (packets.isEmpty()) return;
-        packets.forEach(p -> {
-            try {
-                player.handleDataPacket(p);
-            } catch (Exception e) {
-                if (log.isWarnEnabled()) {
-                    log.warn("Error whilst processing the packet {}:{} for {} (full data: {})",
-                            p.packetId(), p.getClass().getSimpleName(),
-                            player.getName(), p.toString(),
-                            e
-                    );
-                }
-            }
-        });
     }
 
     @Deprecated

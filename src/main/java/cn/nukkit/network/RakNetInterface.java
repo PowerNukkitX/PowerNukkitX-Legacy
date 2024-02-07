@@ -12,7 +12,6 @@ import cn.nukkit.network.protocol.ProtocolInfo;
 import cn.nukkit.network.session.NetworkPlayerSession;
 import cn.nukkit.network.session.RakNetPlayerSession;
 import cn.nukkit.utils.Utils;
-import static cn.nukkit.utils.Utils.dynamic;
 import com.google.common.base.Strings;
 import com.nukkitx.network.raknet.RakNetServer;
 import com.nukkitx.network.raknet.RakNetServerListener;
@@ -30,6 +29,8 @@ import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+
+import static cn.nukkit.utils.Utils.dynamic;
 
 /**
  * @author MagicDroidX (Nukkit Project)
@@ -244,7 +245,7 @@ public class RakNetInterface implements RakNetServerListener, AdvancedSourceInte
         RakNetPlayerSession session = this.sessions.get(player.getRawSocketAddress());
         if (session != null) {
             packet.tryEncode();
-            session.sendResourcePacket(packet.clone());
+            session.sendPacket(packet);
         }
         return null;
     }
