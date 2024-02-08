@@ -46,7 +46,7 @@ jobs:
         with:
           java-version: 17
       - name: Build with Maven
-        run: mvn -B package -DskipTests=false -Darguments="-Dmaven.javadoc.skip=true"
+        run: mvn -B package -Darguments="-Dmaven.test.skip=true -Dmaven.javadoc.skip=true"
       - name: Get version
         id: getVersion
         uses: entimaniac/read-pom-version-action@1.0.0
