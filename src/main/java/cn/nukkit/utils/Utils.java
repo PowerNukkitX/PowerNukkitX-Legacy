@@ -8,6 +8,7 @@ import cn.nukkit.level.Level;
 import cn.nukkit.math.AxisAlignedBB;
 import cn.nukkit.math.NukkitMath;
 import cn.nukkit.math.Vector3;
+import io.netty.buffer.ByteBuf;
 import lombok.extern.log4j.Log4j2;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,6 +40,12 @@ public class Utils {
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")
     public static final SplittableRandom random = new SplittableRandom();
+
+    public static byte[] convertByteBuf2Array(ByteBuf buf) {
+        byte[] payload = new byte[buf.readableBytes()];
+        buf.readBytes(payload);
+        return payload;
+    }
 
     @PowerNukkitOnly
     @Since("1.4.0.0-PN")

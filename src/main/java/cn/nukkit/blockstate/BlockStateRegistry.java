@@ -239,7 +239,7 @@ public class BlockStateRegistry {
     }
 
     @Nullable
-    private static Registration findRegistrationByRuntimeId(int runtimeId) {
+    public static Registration findRegistrationByRuntimeId(int runtimeId) {
         return runtimeIdRegistration.get(runtimeId);
     }
 
@@ -273,31 +273,47 @@ public class BlockStateRegistry {
         return new NoSuchElementException("The block id for the runtime id " + runtimeId + " is not registered");
     }
 
-    private Registration getRegistration(BlockState state) {
+    public Registration getRegistration(BlockState state) {
         return blockStateRegistration.computeIfAbsent(state, BlockStateRegistry::findRegistration);
     }
 
     private Registration findRegistration(final BlockState state) {
+        String blockMapping = RuntimeItemMapping.getBlockMapping().getOrDefault(state.getBlockId() + ":" + state.getDataStorage().intValue(), null);
+        if (blockMapping != null) {
+            Registration registration = stateIdRegistration.get(blockMapping);
+            if (registration != null) {
+                CompoundTag originalBlock = registration.originalBlock;
+                originalBlock.remove("runtimeId");
+                originalBlock.remove("blockId");
+                return registration;
+            }
+        }
         // Special case for PN-96 PowerNukkit#210 where the world contains blocks like 0:13, 0:7, etc
         if (state.getBlockId() == BlockID.AIR) {
             Registration airRegistration = blockStateRegistration.get(BlockState.AIR);
             if (airRegistration != null) {
-                return new Registration(state, airRegistration.runtimeId, airRegistration.blockStateHash, null);
+                CompoundTag originalBlock = airRegistration.originalBlock;
+                originalBlock.remove("runtimeId");
+                originalBlock.remove("blockId");
+                return new Registration(state, airRegistration.runtimeId, airRegistration.blockStateHash, originalBlock);
             }
         }
 
         Registration registration = findRegistrationByStateId(state);
-        removeStateIdsAsync(registration);
+//        removeStateIdsAsync(registration);
+        CompoundTag originalBlock = registration.originalBlock;
+        originalBlock.remove("runtimeId");
+        originalBlock.remove("blockId");
         return registration;
     }
 
     private Registration findRegistrationByStateId(BlockState state) {
         Registration registration;
         try {
-            registration = stateIdRegistration.remove(state.getStateId());
+            registration = stateIdRegistration.get(state.getStateId());
             if (registration != null) {
                 registration.state = state;
-                registration.originalBlock = null;
+//                registration.originalBlock = null;
                 return registration;
             }
         } catch (Exception e) {
@@ -319,10 +335,10 @@ public class BlockStateRegistry {
         }
 
         try {
-            registration = stateIdRegistration.remove(state.getLegacyStateId());
+            registration = stateIdRegistration.get(state.getLegacyStateId());
             if (registration != null) {
                 registration.state = state;
-                registration.originalBlock = null;
+//                registration.originalBlock = null;
                 return registration;
             }
         } catch (Exception e) {
@@ -376,7 +392,7 @@ public class BlockStateRegistry {
         }
         if (state != null) {
             registration.state = state;
-            registration.originalBlock = null;
+//            registration.originalBlock = null;
         } else {
             throw runtimeIdNotRegistered(runtimeId);
         }
@@ -462,7 +478,7 @@ public class BlockStateRegistry {
             state = buildStateFromCompound(originalBlock);
             if (state != null) {
                 registration.state = state;
-                registration.originalBlock = null;
+//                registration.originalBlock = null;
             }
         }
         return state;
@@ -800,13 +816,13 @@ public class BlockStateRegistry {
     @AllArgsConstructor
     @ToString
     @EqualsAndHashCode
-    private static class Registration {
+    public static class Registration {
         @Nullable
-        private BlockState state;
-        private final int runtimeId;
-        private final int blockStateHash;
+        public BlockState state;
+        public final int runtimeId;
+        public final int blockStateHash;
         @Nullable
-        private CompoundTag originalBlock;
+        public CompoundTag originalBlock;
     }
 
     @Data

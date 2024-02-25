@@ -1,7 +1,7 @@
 package cn.nukkit.level;
 
 import cn.nukkit.api.Since;
-import cn.nukkit.nbt.tag.CompoundTag;
+import cn.nukkit.nbt.tag.*;
 import cn.nukkit.utils.BinaryStream;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
@@ -254,6 +254,21 @@ public class GameRules {
                 throw new UnsupportedOperationException("Rule not of type float");
             }
             return (Float) value;
+        }
+
+        public Tag getTag() {
+            switch (type) {
+                case BOOLEAN -> {
+                    return new ByteTag(getValueAsBoolean() ? 1 : 0);
+                }
+                case INTEGER -> {
+                    return new IntTag(getValueAsInteger());
+                }
+                case FLOAT -> {
+                    return new FloatTag(getValueAsFloat());
+                }
+            }
+            return null;
         }
 
         @Since("1.5.0.0-PN")

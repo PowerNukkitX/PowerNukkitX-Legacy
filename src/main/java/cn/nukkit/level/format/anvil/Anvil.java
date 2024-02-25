@@ -375,7 +375,7 @@ public class Anvil extends BaseLevelProvider implements DimensionDataProvider {
         }
     }
 
-    protected synchronized BaseRegionLoader loadRegion(int x, int z) {
+    public synchronized BaseRegionLoader loadRegion(int x, int z) {
         BaseRegionLoader tmp = lastRegion.get();
         if (tmp != null && x == tmp.getX() && z == tmp.getZ()) {
             return tmp;

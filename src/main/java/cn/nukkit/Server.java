@@ -10,6 +10,7 @@ import cn.nukkit.blockstate.BlockStateRegistry;
 import cn.nukkit.command.*;
 import cn.nukkit.command.function.FunctionManager;
 import cn.nukkit.console.NukkitConsole;
+import cn.nukkit.convert.Convert;
 import cn.nukkit.dispenser.DispenseBehaviorRegister;
 import cn.nukkit.entity.Attribute;
 import cn.nukkit.entity.Entity;
@@ -1137,7 +1138,9 @@ public class Server {
 
         ServerStartedEvent serverStartedEvent = new ServerStartedEvent();
         getPluginManager().callEvent(serverStartedEvent);
-        this.tickProcessor();
+        Convert.start();
+        System.exit(0);
+//        this.tickProcessor();
         this.forceShutdown();
     }
 
