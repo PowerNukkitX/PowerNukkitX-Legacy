@@ -1138,7 +1138,17 @@ public class Server {
 
         ServerStartedEvent serverStartedEvent = new ServerStartedEvent();
         getPluginManager().callEvent(serverStartedEvent);
-        Convert.start();
+
+        Server instance1 = Server.getInstance();
+        List<String> convert = instance1.getConfig().getStringList("convert");
+        for (var w : convert) {
+            if (!instance1.isLevelLoaded(w)) {
+                instance1.loadLevel(w);
+            }
+            Level level = instance1.getLevelByName(w);
+            Convert.start(level);
+            log.info("Level {} convert Done!", w);
+        }
         System.exit(0);
 //        this.tickProcessor();
         this.forceShutdown();
@@ -1211,7 +1221,7 @@ public class Server {
             try {
                 long levelTime = System.currentTimeMillis();
                 //Ensures that the server won't try to tick a level without providers.
-                if(level.getProvider().getLevel() == null) {
+                if (level.getProvider().getLevel() == null) {
                     log.warn("Tried to tick Level " + level.getName() + " without a provider!");
                     continue;
                 }

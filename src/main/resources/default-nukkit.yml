@@ -1,3 +1,5 @@
+convert: [ "world" ]
+
 settings:
  language: "eng"
  force-language: false
