@@ -322,7 +322,7 @@ public class Server {
 
     private Watchdog watchdog;
 
-    private DB nameLookup;
+    public DB nameLookup;
 
     private PlayerDataSerializer playerDataSerializer;
 
@@ -2142,12 +2142,10 @@ public class Server {
         return getOfflinePlayerDataInternal(uuid.toString(), true, create);
     }
 
-    @Deprecated
     public CompoundTag getOfflinePlayerData(String name) {
         return getOfflinePlayerData(name, false);
     }
 
-    @Deprecated
     public CompoundTag getOfflinePlayerData(String name, boolean create) {
         Optional<UUID> uuid = lookupName(name);
         return getOfflinePlayerDataInternal(uuid.map(UUID::toString).orElse(name), true, create);

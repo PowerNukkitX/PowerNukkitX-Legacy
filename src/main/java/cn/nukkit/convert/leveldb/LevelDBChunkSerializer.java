@@ -4,6 +4,7 @@ import cn.nukkit.Player;
 import cn.nukkit.blockentity.BlockEntity;
 import cn.nukkit.blockstate.BlockState;
 import cn.nukkit.blockstate.BlockStateRegistry;
+import cn.nukkit.convert.BlockEntityConvert;
 import cn.nukkit.convert.palette.Palette;
 import cn.nukkit.entity.Entity;
 import cn.nukkit.level.DimensionData;
@@ -57,6 +58,7 @@ public class LevelDBChunkSerializer {
     //serialize chunk section
     private void serializeBlock(WriteBatch writeBatch, Chunk chunk, DimensionData dimensionData) {
         ChunkSection[] sections = chunk.getSections();
+        int minSubY = dimensionData.getMinHeight() >> 4;
         for (var section : sections) {
             if (section == null) {
                 continue;
@@ -66,6 +68,7 @@ public class LevelDBChunkSerializer {
                 buffer.writeByte(9);
                 buffer.writeByte(2);
                 int y = section.getY();
+                y += minSubY;
                 buffer.writeByte(y);
                 BlockStateRegistry.Registration registration = BlockStateRegistry.getRegistration(BlockState.AIR);
                 CompoundTag originalBlock = registration.originalBlock;
@@ -138,6 +141,7 @@ public class LevelDBChunkSerializer {
             else {
                 for (BlockEntity blockEntity : blockEntities) {
                     blockEntity.saveNBT();
+                    BlockEntityConvert.convertInventory(blockEntity.namedTag);
                     NBTIO.write(blockEntity.namedTag, bufStream, ByteOrder.LITTLE_ENDIAN);
                 }
                 writeBatch.put(key, Utils.convertByteBuf2Array(tileBuffer));

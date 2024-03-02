@@ -71,6 +71,9 @@ public class ByteArrayTag extends Tag {
 
     @Override
     public String toSNBT(int space) {
+        if (this.data.length == 0) {
+            return "[B;]";
+        }
         StringBuilder builder = new StringBuilder("[B; ");
         for (int i = 0; i < this.data.length - 1; i++) {
             builder.append(data[i]).append("b, ");

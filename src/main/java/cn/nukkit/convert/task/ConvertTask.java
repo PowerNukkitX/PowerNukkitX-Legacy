@@ -41,6 +41,7 @@ public class ConvertTask extends ForkJoinTask {
                     if (regionLoader.chunkExists(i, j)) {
                         try {
                             Chunk chunk = (Chunk) regionLoader.readChunk(i, j);
+                            chunk.initChunk();
                             levelDBStorage.writeChunk(chunk, dimensionData);
                         } catch (IOException e) {
                             throw new RuntimeException(e);
