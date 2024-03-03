@@ -19,7 +19,7 @@ network:
  batch-threshold: 256
  compression-level: 7
  async-compression: false
- zlib-provider: 2
+ zlib-provider: 3
  snappy: false
 
 debug:

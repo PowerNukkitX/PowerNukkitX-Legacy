@@ -277,8 +277,23 @@ public class BlockStateRegistry {
         return blockStateRegistration.computeIfAbsent(state, BlockStateRegistry::findRegistration);
     }
 
+    static Map<String, String> extraMappings = new HashMap<>();
+
+    static {
+        extraMappings.put("17:4", "minecraft:acacia;pillar_axis=y");
+        extraMappings.put("17:12", "minecraft:acacia;pillar_axis=x");
+        extraMappings.put("17:20", "minecraft:acacia;pillar_axis=z");
+        extraMappings.put("17:5", "minecraft:dark_oak;pillar_axis=y");
+        extraMappings.put("17:13", "minecraft:dark_oak;pillar_axis=x");
+        extraMappings.put("17:21", "minecraft:dark_oak;pillar_axis=z");
+    }
+
     private Registration findRegistration(final BlockState state) {
-        String blockMapping = RuntimeItemMapping.getBlockMapping().getOrDefault(state.getBlockId() + ":" + state.getDataStorage().intValue(), null);
+        String origin = state.getBlockId() + ":" + state.getDataStorage().intValue();
+        String blockMapping = RuntimeItemMapping.getBlockMapping().get(origin);
+        if (blockMapping == null) {
+            blockMapping = extraMappings.get(origin);
+        }
         if (blockMapping != null) {
             Registration registration = stateIdRegistration.get(blockMapping);
             if (registration != null) {
