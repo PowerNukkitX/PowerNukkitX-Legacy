@@ -1,4 +1,7 @@
 convert: [ "world" ]
+convert_world: false
+convert_player: false
+core: 1
 
 settings:
  language: "eng"

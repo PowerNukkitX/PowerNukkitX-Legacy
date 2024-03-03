@@ -1,5 +1,6 @@
 package cn.nukkit.convert;
 
+import cn.nukkit.Server;
 import cn.nukkit.convert.leveldb.LevelDBStorage;
 import cn.nukkit.convert.leveldb.LevelDat;
 import cn.nukkit.convert.task.ConvertTask;
@@ -24,12 +25,13 @@ import java.util.concurrent.ForkJoinTask;
 @Slf4j
 public class Convert {
     public static PluginI18n I18N;
-    public static ForkJoinPool THREAD_POOL_EXECUTOR = (ForkJoinPool) Executors.newWorkStealingPool();
+    public static ForkJoinPool THREAD_POOL_EXECUTOR;
+
+    static {
+        THREAD_POOL_EXECUTOR = (ForkJoinPool) Executors.newWorkStealingPool(Server.getInstance().getConfig().getInt("core"));
+    }
 
     public static void start(Level level) {
-        PlayerDataConvert.start();
-        log.info("convert player data complete!");
-
         String levelName = level.getName();
         File file = new File("worlds", levelName + "/region");
         Anvil levelProvider = (Anvil) level.requireProvider();

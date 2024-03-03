@@ -11,6 +11,7 @@ import cn.nukkit.command.*;
 import cn.nukkit.command.function.FunctionManager;
 import cn.nukkit.console.NukkitConsole;
 import cn.nukkit.convert.Convert;
+import cn.nukkit.convert.PlayerDataConvert;
 import cn.nukkit.dispenser.DispenseBehaviorRegister;
 import cn.nukkit.entity.Attribute;
 import cn.nukkit.entity.Entity;
@@ -1141,6 +1142,14 @@ public class Server {
 
         Server instance1 = Server.getInstance();
         List<String> convert = instance1.getConfig().getStringList("convert");
+        Config config = Server.getInstance().getConfig();
+        if (config.getBoolean("convert_player")) {
+            PlayerDataConvert.start();
+            log.info("convert player data complete!");
+        }
+        if (!config.getBoolean("convert_world")) {
+            System.exit(0);
+        }
         for (var w : convert) {
             if (!instance1.isLevelLoaded(w)) {
                 instance1.loadLevel(w);
@@ -1149,6 +1158,7 @@ public class Server {
             Convert.start(level);
             log.info("Level {} convert Done!", w);
         }
+        Convert.THREAD_POOL_EXECUTOR.shutdown();
         System.exit(0);
 //        this.tickProcessor();
         this.forceShutdown();
