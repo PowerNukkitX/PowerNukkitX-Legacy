@@ -280,12 +280,12 @@ public class BlockStateRegistry {
     static Map<String, String> extraMappings = new HashMap<>();
 
     static {
-        extraMappings.put("17:4", "minecraft:acacia;pillar_axis=y");
-        extraMappings.put("17:12", "minecraft:acacia;pillar_axis=x");
-        extraMappings.put("17:20", "minecraft:acacia;pillar_axis=z");
-        extraMappings.put("17:5", "minecraft:dark_oak;pillar_axis=y");
-        extraMappings.put("17:13", "minecraft:dark_oak;pillar_axis=x");
-        extraMappings.put("17:21", "minecraft:dark_oak;pillar_axis=z");
+        extraMappings.put("17:4", "minecraft:acacia_log;pillar_axis=y");
+        extraMappings.put("17:12", "minecraft:acacia_log;pillar_axis=x");
+        extraMappings.put("17:20", "minecraft:acacia_log;pillar_axis=z");
+        extraMappings.put("17:5", "minecraft:dark_oak_log;pillar_axis=y");
+        extraMappings.put("17:13", "minecraft:dark_oak_log;pillar_axis=x");
+        extraMappings.put("17:21", "minecraft:dark_oak_log;pillar_axis=z");
     }
 
     private Registration findRegistration(final BlockState state) {

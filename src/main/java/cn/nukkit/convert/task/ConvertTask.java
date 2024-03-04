@@ -41,8 +41,11 @@ public class ConvertTask extends ForkJoinTask {
                     if (regionLoader.chunkExists(i, j)) {
                         try {
                             Chunk chunk = (Chunk) regionLoader.readChunk(i, j);
-                            chunk.initChunk();
-                            levelDBStorage.writeChunk(chunk, dimensionData);
+                            if (chunk != null) {
+                                chunk.initChunk();
+                                levelDBStorage.writeChunk(chunk, dimensionData);
+                            }
+                            chunk = null;
                         } catch (IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -51,6 +54,11 @@ public class ConvertTask extends ForkJoinTask {
                 }
             }
         } // progress bar stops automatically after completion of try-with-resource block
+        try {
+            regionLoader.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return true;
     }
 }
