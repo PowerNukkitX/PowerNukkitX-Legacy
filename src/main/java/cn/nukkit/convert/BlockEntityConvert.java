@@ -6,7 +6,7 @@ import cn.nukkit.nbt.tag.CompoundTag;
 import cn.nukkit.nbt.tag.ListTag;
 
 public class BlockEntityConvert {
-    public static void convertInventory(CompoundTag root) {
+    public static void convertBlockEntity(CompoundTag root) {
         ListTag<CompoundTag> items = root.getList("Items", CompoundTag.class);
         ListTag<CompoundTag> result = new ListTag<>();
         for (var nbt : items.getAll()) {
@@ -14,6 +14,7 @@ public class BlockEntityConvert {
             int slot = nbt.getByte("Slot");
             int count = nbt.getByte("Count");
             int damage = nbt.getShort("Damage");
+            CompoundTag tag = nbt.contains("tag") ? nbt.getCompound("tag") : null;
 
             var newTag = new CompoundTag();
             Item item = Item.get(id);
@@ -22,8 +23,8 @@ public class BlockEntityConvert {
                     .putShort("Damage", damage);
             newTag.putString("Name", namespaceId);
             newTag.putByte("Slot", slot);
-            if (item.hasCompoundTag()) {
-                newTag.putCompound("tag", item.getNamedTag());
+            if (tag != null) {
+                newTag.putCompound("tag", tag);
             }
             if (item.getBlockUnsafe() != null) {
                 newTag.putCompound("Block", NBTIO.putBlockHelper(item.getBlockUnsafe()));

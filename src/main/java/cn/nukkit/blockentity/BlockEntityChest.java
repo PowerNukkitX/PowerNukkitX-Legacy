@@ -71,7 +71,7 @@ public class BlockEntityChest extends BlockEntitySpawnableContainer implements B
         return (ChestInventory) inventory;
     }
 
-    protected void checkPairing() {
+    public void checkPairing() {
         BlockEntityChest pair = this.getPair();
 
         if (pair != null) {

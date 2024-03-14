@@ -2,6 +2,7 @@ package cn.nukkit.convert.leveldb;
 
 import cn.nukkit.Player;
 import cn.nukkit.blockentity.BlockEntity;
+import cn.nukkit.blockentity.BlockEntityChest;
 import cn.nukkit.blockstate.BlockState;
 import cn.nukkit.blockstate.BlockStateRegistry;
 import cn.nukkit.convert.BlockEntityConvert;
@@ -140,8 +141,9 @@ public class LevelDBChunkSerializer {
             if (blockEntities.isEmpty()) writeBatch.delete(key);
             else {
                 for (BlockEntity blockEntity : blockEntities) {
+                    if (blockEntity instanceof BlockEntityChest chest) chest.checkPairing();
                     blockEntity.saveNBT();
-                    BlockEntityConvert.convertInventory(blockEntity.namedTag);
+                    BlockEntityConvert.convertBlockEntity(blockEntity.namedTag);
                     NBTIO.write(blockEntity.namedTag, bufStream, ByteOrder.LITTLE_ENDIAN);
                 }
                 writeBatch.put(key, Utils.convertByteBuf2Array(tileBuffer));
