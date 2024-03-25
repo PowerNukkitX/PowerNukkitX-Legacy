@@ -10,14 +10,15 @@ public class BlockEntityConvert {
         ListTag<CompoundTag> items = root.getList("Items", CompoundTag.class);
         ListTag<CompoundTag> result = new ListTag<>();
         for (var nbt : items.getAll()) {
-            int id = nbt.getShort("id");
+
+            Item item = nbt.contains("Name") ? Item.fromString(nbt.getString("Name")) : Item.get(nbt.getShort("id"));
+
             int slot = nbt.getByte("Slot");
             int count = nbt.getByte("Count");
             int damage = nbt.getShort("Damage");
             CompoundTag tag = nbt.contains("tag") ? nbt.getCompound("tag") : null;
 
             var newTag = new CompoundTag();
-            Item item = Item.get(id);
             String namespaceId = item.getNamespaceId();
             newTag.putByte("Count", count)
                     .putShort("Damage", damage);
